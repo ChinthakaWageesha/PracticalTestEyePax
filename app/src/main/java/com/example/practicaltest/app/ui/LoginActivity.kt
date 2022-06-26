@@ -5,10 +5,14 @@ import android.text.Editable
 import android.text.TextWatcher
 import com.example.practicaltest.core.extenstion.clearTextOnRightDrawableClick
 import com.example.practicaltest.core.extenstion.validateOnTextChange
+import com.example.practicaltest.core.general.GoTo
 import com.example.practicaltest.core.ui.BaseActivity
 import com.example.practicaltest.databinding.ActivityLoginBinding
 
 class LoginActivity : BaseActivity() {
+
+    override val toolBarTitle: String
+        get() = ""
 
     private lateinit var binding: ActivityLoginBinding
 
@@ -25,9 +29,8 @@ class LoginActivity : BaseActivity() {
         binding.etEmail.addTextChangedListener(GenericTextWatcher())
         binding.etPassword.addTextChangedListener(GenericTextWatcher())
 
-        binding.btnLogin.setOnClickListener {
-
-        }
+        binding.btnLogin.setOnClickListener { GoTo.main(this) }
+        binding.txtSignUp.setOnClickListener { GoTo.register(this) }
     }
 
     private fun validateLogin() {

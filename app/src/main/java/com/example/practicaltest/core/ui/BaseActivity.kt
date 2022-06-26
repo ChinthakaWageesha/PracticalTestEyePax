@@ -3,7 +3,10 @@ package com.example.practicaltest.core.ui
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.view.Window
+import android.widget.ImageButton
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.practicaltest.R
 import com.example.practicaltest.core.extenstion.showToast
@@ -14,6 +17,7 @@ import org.koin.android.ext.android.inject
 
 abstract class BaseActivity : AppCompatActivity() {
 
+    abstract val toolBarTitle: String
     private var progress: Dialog? = null
     private val mNetworkInterceptor by inject<SupportInterceptor>()
 
@@ -21,6 +25,16 @@ abstract class BaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setProgressLoader()
         setNetworkInterceptor()
+    }
+
+    override fun onPostCreate(savedInstanceState: Bundle?) {
+        super.onPostCreate(savedInstanceState)
+        initToolbar()
+    }
+
+    private fun initToolbar() {
+        findViewById<TextView>(R.id.txt_toolbar_title)?.text = toolBarTitle
+        findViewById<ImageButton>(R.id.btn_toolbar_back)?.setOnClickListener { onBackPressed() }
     }
 
     private fun setProgressLoader() {

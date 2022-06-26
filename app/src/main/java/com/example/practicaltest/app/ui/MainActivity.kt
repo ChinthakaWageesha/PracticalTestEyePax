@@ -9,6 +9,9 @@ class MainActivity : BaseActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+    override val toolBarTitle: String
+        get() = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
