@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="TextInputLayoutHeight">70dp</dimen>
+    <dimen name="buttonHeight">56dp</dimen>
+    <dimen name="editTextHeight">44dp</dimen>
+    <dimen name="verticalMargin">32dp</dimen>
+    <dimen name="horizontalMargin">24dp</dimen>
+    <dimen name="itemVerticalMargin">8dp</dimen>
+    <dimen name="itemHorizontalMargin">5dp</dimen>
+    <dimen name="buttonElevation">6dp</dimen>
+    <dimen name="radius_8">8dp</dimen>
+    <dimen name="radius_16">16dp</dimen>
+</resources>

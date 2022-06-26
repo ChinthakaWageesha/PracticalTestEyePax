@@ -10,7 +10,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PracticalTest">
-
+        <activity
+            android:name=".app.ui.LoginActivity"
+            android:exported="true"
+            android:theme="@style/Theme.PracticalTest.NoActionBar"/>
         <activity
             android:name=".core.ui.CoreActivity"
             android:exported="true"
@@ -22,12 +25,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
         <activity
             android:name=".app.ui.MainActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
     </application>
 
 </manifest>
