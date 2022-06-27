@@ -11,4 +11,10 @@
     <string name="label_last_name">Last Name</string>
     <string name="label_confirm_password">Confirm Password</string>
     <string name="label_already_have_account">Already have an account?</string>
+
+    <string name="label_home">Home</string>
+    <string name="label_favorite">Favorite</string>
+    <string name="label_profile">Profile</string>
+
+    <string name="label_search">Search</string>
 </resources>

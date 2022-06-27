@@ -8,6 +8,7 @@
     <color name="colorWhite">#FFFFFFFF</color>
     <color name="colorLightGray">#E8E8E8</color>
     <color name="colorGray">#aaaaaa</color>
+    <color name="colorTextGray">#A6A6A6</color>
     <color name="colorPink">#FF6289</color>
     <color name="colorTransparent">#00000000</color>
 </resources>
