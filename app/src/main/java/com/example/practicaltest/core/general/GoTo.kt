@@ -2,8 +2,8 @@ package com.example.practicaltest.core.general
 
 import android.content.Context
 import android.content.Intent
-import com.example.practicaltest.app.ui.MainActivity
-import com.example.practicaltest.app.ui.RegisterActivity
+import com.example.practicaltest.app.presentation.MainActivity
+import com.example.practicaltest.app.presentation.register.RegisterActivity
 
 object GoTo {
 

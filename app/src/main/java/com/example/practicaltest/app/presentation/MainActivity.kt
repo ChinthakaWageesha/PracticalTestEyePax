@@ -1,14 +1,15 @@
-package com.example.practicaltest.app.ui
+package com.example.practicaltest.app.presentation
 
 import android.os.Bundle
 import android.os.Handler
 import android.view.MenuItem
 import com.example.practicaltest.R
 import com.example.practicaltest.app.dependencyinjction.injectFeature
+import com.example.practicaltest.app.presentation.newsfeed.NewsFeedFragment
 import com.example.practicaltest.core.extenstion.currentFragment
 import com.example.practicaltest.core.extenstion.replaceFragment
 import com.example.practicaltest.core.extenstion.showToast
-import com.example.practicaltest.core.ui.BaseActivity
+import com.example.practicaltest.core.presentation.BaseActivity
 import com.example.practicaltest.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 

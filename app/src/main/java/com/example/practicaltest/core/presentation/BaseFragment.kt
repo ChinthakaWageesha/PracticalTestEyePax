@@ -1,4 +1,4 @@
-package com.example.practicaltest.core.ui
+package com.example.practicaltest.core.presentation
 
 import android.content.Context
 import android.os.Bundle

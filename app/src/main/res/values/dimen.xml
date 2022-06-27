@@ -4,6 +4,7 @@
     <dimen name="buttonHeight">56dp</dimen>
     <dimen name="editTextHeight">44dp</dimen>
     <dimen name="verticalMargin">32dp</dimen>
+    <dimen name="bottomNavVerticalMargin">44dp</dimen>
     <dimen name="horizontalMargin">24dp</dimen>
     <dimen name="itemVerticalMargin">8dp</dimen>
     <dimen name="itemHorizontalMargin">5dp</dimen>

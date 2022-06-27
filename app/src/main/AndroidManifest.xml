@@ -11,15 +11,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PracticalTest">
         <activity
-            android:name=".app.ui.RegisterActivity"
+            android:name=".app.presentation.register.RegisterActivity"
             android:exported="true"
             android:theme="@style/Theme.PracticalTest.NoActionBar"/>
         <activity
-            android:name=".app.ui.LoginActivity"
+            android:name=".app.presentation.login.LoginActivity"
             android:exported="true"
             android:theme="@style/Theme.PracticalTest.NoActionBar" />
         <activity
-            android:name=".core.ui.CoreActivity"
+            android:name=".core.presentation.CoreActivity"
             android:exported="true"
             android:theme="@style/Theme.PracticalTest.Splash">
             <intent-filter>
@@ -30,7 +30,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".app.ui.MainActivity"
+            android:name=".app.presentation.MainActivity"
+            android:theme="@style/Theme.PracticalTest.NoActionBar"
             android:exported="true" />
     </application>
 

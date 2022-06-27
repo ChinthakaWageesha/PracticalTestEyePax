@@ -1,4 +1,4 @@
-package com.example.practicaltest.app.ui
+package com.example.practicaltest.app.presentation.login
 
 import android.os.Bundle
 import android.text.Editable
@@ -6,7 +6,7 @@ import android.text.TextWatcher
 import com.example.practicaltest.core.extenstion.clearTextOnRightDrawableClick
 import com.example.practicaltest.core.extenstion.validateOnTextChange
 import com.example.practicaltest.core.general.GoTo
-import com.example.practicaltest.core.ui.BaseActivity
+import com.example.practicaltest.core.presentation.BaseActivity
 import com.example.practicaltest.databinding.ActivityLoginBinding
 
 class LoginActivity : BaseActivity() {

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".app.ui.MainActivity">
+    tools:context=".app.presentation.MainActivity">
 
     <FrameLayout
         android:id="@+id/fl_main"
@@ -21,10 +21,11 @@
         android:id="@+id/nav_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/verticalMargin"
+        android:layout_marginHorizontal="@dimen/bottomNavVerticalMargin"
         android:layout_marginBottom="32dp"
-        android:outlineProvider="background"
+        android:outlineProvider="none"
         android:elevation="4dp"
+        android:paddingVertical="@dimen/itemVerticalMargin"
         android:background="@drawable/bg_white_corner_radius_32"
         app:itemTextAppearanceActive="@style/BottomNavigationActiveTextStyle"
         app:itemTextAppearanceInactive="@style/BottomNavigationInactiveTextStyle"

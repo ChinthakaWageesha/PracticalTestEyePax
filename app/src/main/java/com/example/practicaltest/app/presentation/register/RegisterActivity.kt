@@ -1,4 +1,4 @@
-package com.example.practicaltest.app.ui
+package com.example.practicaltest.app.presentation.register
 
 import android.os.Bundle
 import android.text.Editable
@@ -7,7 +7,7 @@ import com.example.practicaltest.R
 import com.example.practicaltest.core.extenstion.clearTextOnRightDrawableClick
 import com.example.practicaltest.core.extenstion.validateOnTextChange
 import com.example.practicaltest.core.general.GoTo
-import com.example.practicaltest.core.ui.BaseActivity
+import com.example.practicaltest.core.presentation.BaseActivity
 import com.example.practicaltest.databinding.ActivityRegisterBinding
 
 class RegisterActivity : BaseActivity() {
