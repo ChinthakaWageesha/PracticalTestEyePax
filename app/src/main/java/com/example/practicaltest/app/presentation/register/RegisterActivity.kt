@@ -43,7 +43,7 @@ class RegisterActivity : BaseActivity() {
         binding.etLastName.validateOnTextChange(isCheckValidateIcon = true) { s -> s.isNotEmpty() }
         binding.etEmail.validateOnTextChange(isCheckValidateIcon = true) { s -> s.isNotEmpty() }
         binding.etPassword.validateOnTextChange(isCheckValidateIcon = true) { s -> s.length > 8 }
-        binding.etConfirmPassword.validateOnTextChange(isCheckValidateIcon = true) { s -> s == binding.etPassword.text.toString() }
+        binding.etConfirmPassword.validateOnTextChange(isCheckValidateIcon = true) { s -> s.length > 8 }
 
         binding.etFirstName.clearTextOnRightDrawableClick()
         binding.etLastName.clearTextOnRightDrawableClick()
@@ -61,7 +61,7 @@ class RegisterActivity : BaseActivity() {
             binding.btnSignUp.isEnabled =
                 binding.etFirstName.text!!.isNotEmpty() && binding.etLastName.text!!.isNotEmpty() &&
                         binding.etEmail.text!!.isNotEmpty() && binding.etPassword.text!!.isNotEmpty() &&
-                        binding.etConfirmPassword.equals(binding.etPassword.text.toString())
+                        binding.etConfirmPassword.text.toString() == binding.etPassword.text.toString()
         }
     }
 }

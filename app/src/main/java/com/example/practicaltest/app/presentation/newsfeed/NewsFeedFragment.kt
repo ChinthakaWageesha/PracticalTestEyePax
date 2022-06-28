@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.practicaltest.core.extenstion.showToast
+import com.example.practicaltest.core.general.GoTo
 import com.example.practicaltest.core.presentation.BaseFragment
 import com.example.practicaltest.databinding.FragmentNewsFeedBinding
 
@@ -34,6 +35,7 @@ class NewsFeedFragment : BaseFragment(), (String) -> Unit {
         setLatestNewsAdapter()
         setCategoryAdapter()
         setNewsAdapter()
+        binding.txtSeeAll.setOnClickListener { GoTo.topNews(requireContext()) }
     }
 
     private fun setLatestNewsAdapter() {

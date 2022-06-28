@@ -11,9 +11,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PracticalTest">
         <activity
-            android:name=".app.presentation.viewLatestNews.LatestNewsActivity"
+            android:name=".app.presentation.topNews.TopNewsActivity"
             android:exported="true"
-            android:theme="@style/Theme.PracticalTest.NoActionBar"/>
+            android:theme="@style/Theme.PracticalTest.NoActionBar" />
+        <activity
+            android:name=".app.presentation.latestNews.LatestNewsActivity"
+            android:exported="true"
+            android:theme="@style/Theme.PracticalTest.NoActionBar" />
         <activity
             android:name=".app.presentation.register.RegisterActivity"
             android:exported="true"

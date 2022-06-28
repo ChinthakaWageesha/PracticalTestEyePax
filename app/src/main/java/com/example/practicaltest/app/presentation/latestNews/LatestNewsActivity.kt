@@ -1,4 +1,4 @@
-package com.example.practicaltest.app.presentation.viewLatestNews
+package com.example.practicaltest.app.presentation.latestNews
 
 import android.os.Bundle
 import com.example.practicaltest.core.presentation.BaseActivity

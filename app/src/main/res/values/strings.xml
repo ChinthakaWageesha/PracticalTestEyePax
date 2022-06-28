@@ -19,4 +19,6 @@
     <string name="label_search">Search</string>
     <string name="label_latest_news">Latest News</string>
     <string name="label_see_all">See All</string>
+
+    <string name="label_hot_updates">Hot Updates</string>
 </resources>
