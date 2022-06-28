@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="10:8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/img_latest_news"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/image"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include
+        android:id="@+id/include2"
+        layout="@layout/toolbar_transparent" />
+
+    <ScrollView
+        android:id="@+id/sv_latest_news_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintDimensionRatio="9:10"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_latest_news_content_base"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_white_top_corners_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/txt_latest_news_content"
+                style="@style/TextMediumPlusBlack"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="100dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="@font/nunito_semi_bold"
+                android:text="LONDON — Cryptocurrencies “have no intrinsic value” and people who invest
+                in them should be prepared to lose all their money, Bank of England Governor Andrew
+                Bailey said.Digital currencies like bitcoin, ether and even dogecoin have been on a
+                tear this year, reminding some investors of the 2017 crypto bubble in which bitcoin
+                blasted toward $20,000, only to sink as low as $3,122 a year later.Asked at a press
+                conference Thursday about the rising value of cryptocurrencies, Bailey said:
+                “They have no intrinsic value. That doesn’t mean to say people don’t put value on
+                them, because they can have extrinsic value. But they have no intrinsic value.”
+                “I’m going to say this very bluntly again,” he added. “Buy them only if you’re
+                prepared to lose all your money.”Bailey’s comments echoed a similar warning from
+                the U.K.’s Financial Conduct Authority.“Investing in cryptoassets, or investments
+                and lending linked to them, generally involves taking very high risks with investors’
+                money,” the financial services watchdog said in January.“If consumers invest in
+                these types of product, they should be prepared to lose all their money.”Bailey,
+                who was formerly the chief executive of the FCA, has long been a skeptic of crypto.
+                In 2017, he warned: “If you want to invest in bitcoin, be prepared to lose all your
+                money.”"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_latest_news_header_base"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/horizontalMargin"
+        android:alpha="0.9"
+        android:background="@drawable/bg_gradient_gray_corners_16"
+        app:layout_constraintBottom_toTopOf="@id/sv_latest_news_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/sv_latest_news_content">
+
+        <TextView
+            android:id="@+id/txt_latest_news_publish_day"
+            style="@style/TextSmallBlack"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:fontFamily="@font/nunito_semi_bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="Sunday, 9 May 2021" />
+
+        <TextView
+            android:id="@+id/txt_latest_news_heading"
+            style="@style/TextLargeBlack"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:fontFamily="@font/nunito_extra_bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_latest_news_publish_day"
+            android:text="Crypto investors should be prepared to lose all their money, BOE governor says" />
+
+        <TextView
+            android:id="@+id/txt_latest_news_publisher"
+            style="@style/TextSmallBlack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp"
+            android:fontFamily="@font/nunito_semi_bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_latest_news_heading"
+            android:text="Published by Ryan Browne" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

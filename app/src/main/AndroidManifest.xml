@@ -11,9 +11,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PracticalTest">
         <activity
-            android:name=".app.presentation.register.RegisterActivity"
+            android:name=".app.presentation.viewLatestNews.LatestNewsActivity"
             android:exported="true"
             android:theme="@style/Theme.PracticalTest.NoActionBar"/>
+        <activity
+            android:name=".app.presentation.register.RegisterActivity"
+            android:exported="true"
+            android:theme="@style/Theme.PracticalTest.NoActionBar" />
         <activity
             android:name=".app.presentation.login.LoginActivity"
             android:exported="true"
@@ -31,8 +35,8 @@
         </activity>
         <activity
             android:name=".app.presentation.MainActivity"
-            android:theme="@style/Theme.PracticalTest.NoActionBar"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Theme.PracticalTest.NoActionBar" />
     </application>
 
 </manifest>

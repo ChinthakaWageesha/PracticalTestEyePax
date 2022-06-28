@@ -23,6 +23,13 @@
         <item name="android:ellipsize">end</item>
     </style>
 
+    <style name="TextSmallBlack" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:fontFamily">@font/nunito_regular</item>
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
+
     <style name="TextMediumBlack" parent="Widget.AppCompat.TextView">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">14sp</item>
