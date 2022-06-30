@@ -1,4 +1,4 @@
-package com.example.practicaltest.app.presentation.newsfeed
+package com.example.practicaltest.app.presentation.newsfeed.adapter
 
 import android.view.LayoutInflater
 import android.view.View

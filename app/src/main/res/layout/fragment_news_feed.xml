@@ -13,20 +13,20 @@
         android:layout_width="0dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="24dp"
         android:drawableEnd="@drawable/ic_search"
         android:hint="@string/label_search"
         android:inputType="text"
-        app:layout_constraintEnd_toStartOf="@+id/imageView"
+        android:imeOptions="actionSearch"
+        app:layout_constraintEnd_toStartOf="@+id/img_notifications"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/img_notifications"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="16dp"
         android:src="@drawable/ic_notifications"
         app:layout_constraintBottom_toBottomOf="@+id/et_search"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,39 +47,51 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp">
 
-            <TextView
-                android:id="@+id/txt_latest_news"
-                style="@style/TextExLargeBlackBold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/itemVerticalMargin"
-                android:layout_marginVertical="@dimen/horizontalMargin"
-                android:text="@string/label_latest_news"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/txt_see_all"
-                style="@style/TextLargeBlue"
-                android:fontFamily="@font/nunito_bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/label_see_all"
-                android:drawablePadding="@dimen/itemVerticalMargin"
-                android:layout_marginHorizontal="@dimen/itemVerticalMargin"
-                app:layout_constraintBottom_toBottomOf="@+id/txt_latest_news"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/txt_latest_news"
-                app:drawableEndCompat="@drawable/ic_arrow_blue" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_latest_news"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_latest_news_base"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_latest_news" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/txt_latest_news"
+                    style="@style/TextExLargeBlackBold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/itemVerticalMargin"
+                    android:layout_marginVertical="@dimen/horizontalMargin"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="24dp"
+                    android:text="@string/label_latest_news"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/txt_see_all"
+                    style="@style/TextLargeBlue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/itemVerticalMargin"
+                    android:layout_marginEnd="8dp"
+                    android:drawablePadding="@dimen/itemVerticalMargin"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="@string/label_see_all"
+                    app:drawableEndCompat="@drawable/ic_arrow_blue"
+                    app:layout_constraintBottom_toBottomOf="@+id/txt_latest_news"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/txt_latest_news" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_latest_news"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_latest_news" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_categories"
@@ -88,15 +100,40 @@
                 android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rv_latest_news" />
+                app:layout_constraintTop_toBottomOf="@+id/cl_latest_news_base" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_news"
-                android:layout_width="0dp"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_news_base"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rv_categories" />
+                app:layout_constraintTop_toBottomOf="@+id/rv_categories">
+
+                <TextView
+                    android:id="@+id/txt_news_results_count"
+                    style="@style/TextMediumPlusBlack"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:visibility="gone"
+                    android:fontFamily="@font/nunito_semi_bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="About 55435 results for Apple " />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_news"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_news_results_count" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

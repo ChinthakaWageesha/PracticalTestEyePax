@@ -1,5 +1,6 @@
-package com.example.practicaltest.app.presentation.newsfeed
+package com.example.practicaltest.app.presentation.newsfeed.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,9 +9,13 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.practicaltest.R
+import com.example.practicaltest.app.domain.model.DArticle
+import com.example.practicaltest.core.extenstion.loadImage
 import com.example.practicaltest.core.general.GoTo
 
-class LatestNewsAdapter : RecyclerView.Adapter<LatestNewsAdapter.LatestNewsViewHolder>() {
+class LatestNewsAdapter(
+    private val latestNewsList: MutableList<DArticle>
+) : RecyclerView.Adapter<LatestNewsAdapter.LatestNewsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LatestNewsViewHolder {
         return LatestNewsViewHolder(
@@ -32,13 +37,17 @@ class LatestNewsAdapter : RecyclerView.Adapter<LatestNewsAdapter.LatestNewsViewH
         private val txtHeading = itemView.findViewById<TextView>(R.id.txt_latest_news_heading)
         private val txtContent = itemView.findViewById<TextView>(R.id.txt_latest_news_content)
 
+        @SuppressLint("SetTextI18n")
         fun onBind(position: Int) {
 
-            txtPublisher.text = "by Ryan Browne"
-            txtHeading.text =
-                "Crypto investors should be prepared to lose all their money, BOE governor says"
-            txtContent.text =
-                "“I’m going to say this very bluntly again,” he added. “Buy them only if you’re prepared to lose all your money."
+            val latestNews = latestNewsList[position]
+
+            txtPublisher.text = "by ${latestNews.author}"
+            txtHeading.text = latestNews.title
+
+            txtContent.text = latestNews.description
+
+            imgLatestNews.loadImage(latestNews.urlToImage)
 
             cardLatestNews.setOnClickListener { GoTo.latestNews(itemView.context) }
         }

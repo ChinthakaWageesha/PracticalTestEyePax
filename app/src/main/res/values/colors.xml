@@ -11,5 +11,5 @@
     <color name="colorGray">#aaaaaa</color>
     <color name="colorTextGray">#A6A6A6</color>
     <color name="colorPink">#FF6289</color>
-    <color name="colorTransparent">#00000000</color>
+    <color name="colorTransparent">#00FFFFFF</color>
 </resources>
