@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.practicaltest.R
 import com.example.practicaltest.app.domain.model.DArticle
 import com.example.practicaltest.app.presentation.newsfeed.NewsViewModel
+import com.example.practicaltest.core.extenstion.setEmptyView
 import com.example.practicaltest.core.extenstion.showToast
 import com.example.practicaltest.core.extenstion.withNetwork
 import com.example.practicaltest.core.presentation.BaseActivity
@@ -45,10 +46,12 @@ class TopNewsActivity : BaseActivity() {
                 ResourceState.LOADING -> showProgress()
                 ResourceState.SUCCESS -> {
                     hideProgress()
-                    setAdapter(it.data!!.toMutableList())
+                    binding.rvTopNews.setEmptyView(binding.txtNoData, it.data!!.size)
+                    setAdapter(it.data.toMutableList())
                 }
                 ResourceState.ERROR -> {
                     hideProgress()
+                    binding.rvTopNews.setEmptyView(binding.txtNoData, 0)
                     it.message?.showToast(this)
                 }
             }

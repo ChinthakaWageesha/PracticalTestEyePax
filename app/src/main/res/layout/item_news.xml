@@ -34,7 +34,8 @@
 
             <TextView
                 android:id="@+id/txt_news_heading"
-                style="@style/TextMediumWhite"
+                style="@style/TextMediumSecondary"
+                android:textColor="@color/colorWhite"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -47,10 +48,10 @@
                 app:layout_constraintTop_toTopOf="@+id/img_news"
                 tools:text="Crypto investors should be prepared to lose all their money, BOE governor says" />
 
-
             <TextView
                 android:id="@+id/txt_news_publisher"
-                style="@style/TextWhite"
+                style="@style/TextSecondary"
+                android:textColor="@color/colorWhite"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -65,7 +66,8 @@
 
             <TextView
                 android:id="@+id/txt_news_publish_day"
-                style="@style/TextWhite"
+                style="@style/TextSecondary"
+                android:textColor="@color/colorWhite"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"

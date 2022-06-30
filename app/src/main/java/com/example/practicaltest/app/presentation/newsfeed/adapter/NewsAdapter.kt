@@ -5,10 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.practicaltest.R
 import com.example.practicaltest.app.domain.model.DArticle
 import com.example.practicaltest.core.extenstion.loadImage
+import com.example.practicaltest.core.general.GoTo
 
 class NewsAdapter(
     private val newsList: MutableList<DArticle>?
@@ -28,6 +30,7 @@ class NewsAdapter(
 
     inner class NewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+        private val cardNews = itemView.findViewById<CardView>(R.id.card_news)
         private val imgNews = itemView.findViewById<ImageView>(R.id.img_news)
         private val txtPublisher = itemView.findViewById<TextView>(R.id.txt_news_publisher)
         private val txtHeading = itemView.findViewById<TextView>(R.id.txt_news_heading)
@@ -41,6 +44,8 @@ class NewsAdapter(
             txtPublishDay.text = news?.publishedAt!!.split("T")[0]
             txtHeading.text = news.title
             imgNews.loadImage(news.urlToImage)
+
+            cardNews.setOnClickListener { GoTo.latestNews(itemView.context, news) }
         }
     }
 }

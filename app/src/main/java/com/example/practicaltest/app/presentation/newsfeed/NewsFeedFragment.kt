@@ -8,9 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.practicaltest.core.extenstion.clearTextOnRightDrawableClick
-import com.example.practicaltest.core.extenstion.showToast
-import com.example.practicaltest.core.extenstion.validateOnTextChange
 import com.example.practicaltest.core.general.GoTo
 import com.example.practicaltest.core.presentation.BaseFragment
 import com.example.practicaltest.databinding.FragmentNewsFeedBinding
@@ -22,7 +19,7 @@ import com.example.practicaltest.app.domain.model.DArticle
 import com.example.practicaltest.app.presentation.newsfeed.adapter.LatestNewsAdapter
 import com.example.practicaltest.app.presentation.newsfeed.adapter.NewsAdapter
 import com.example.practicaltest.app.presentation.newsfeed.adapter.NewsCategoryAdapter
-import com.example.practicaltest.core.extenstion.withNetwork
+import com.example.practicaltest.core.extenstion.*
 import com.example.practicaltest.core.util.Msg
 import com.example.practicaltest.core.util.Resource
 import com.example.practicaltest.core.util.ResourceState
@@ -94,10 +91,12 @@ class NewsFeedFragment : BaseFragment(), (String) -> Unit {
                 ResourceState.LOADING -> showProgress()
                 ResourceState.SUCCESS -> {
                     hideProgress()
-                    setLatestNewsAdapter(it.data!!.toMutableList())
+                    binding.rvLatestNews.setEmptyView(binding.txtNoDataLatestNews, it.data?.size!!)
+                    setLatestNewsAdapter(it.data.toMutableList())
                 }
                 ResourceState.ERROR -> {
                     hideProgress()
+                    binding.rvLatestNews.setEmptyView(binding.txtNoDataLatestNews, 0)
                     it.message?.showToast(requireContext())
                 }
             }
@@ -131,13 +130,14 @@ class NewsFeedFragment : BaseFragment(), (String) -> Unit {
                 ResourceState.LOADING -> showProgress()
                 ResourceState.SUCCESS -> {
                     hideProgress()
-                    binding.txtNewsResultsCount.visibility = View.VISIBLE
                     binding.txtNewsResultsCount.text =
                         "About ${it.totalResults} results for ${binding.etSearch.text}"
-                    setNewsAdapter(it.data?.data!!.map { it.mapToDomain() }.toMutableList())
+                    binding.rvNews.setEmptyView(binding.txtNoDataNews, it.data!!.data?.size!!)
+                    setNewsAdapter(it.data.data!!.map { it.mapToDomain() }.toMutableList())
                 }
                 ResourceState.ERROR -> {
                     hideProgress()
+                    binding.rvNews.setEmptyView(binding.txtNoDataNews, 0)
                     it.message?.showToast(requireContext())
                 }
             }
@@ -172,6 +172,7 @@ class NewsFeedFragment : BaseFragment(), (String) -> Unit {
     private fun setNewsSearch(searchKey: String) {
         vmNews.searchKey = searchKey
         callGetNewsService()
+        binding.txtNewsResultsCount.visibility = View.VISIBLE
         binding.clLatestNewsBase.visibility = View.GONE
         binding.imgNotifications.visibility = View.GONE
     }

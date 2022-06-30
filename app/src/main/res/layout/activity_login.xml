@@ -92,7 +92,7 @@
 
             <TextView
                 android:id="@+id/txt_do_not_have_account"
-                style="@style/TextLargeBlack"
+                style="@style/TextLargePrimary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
@@ -109,7 +109,7 @@
 
             <TextView
                 android:id="@+id/txt_sign_up"
-                style="@style/TextLargeRed"
+                style="@style/TextLargeTertiary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"

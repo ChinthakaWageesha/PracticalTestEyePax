@@ -9,7 +9,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginHorizontal="@dimen/horizontalMargin"
+        android:paddingHorizontal="@dimen/horizontalMargin"
+        android:paddingVertical="@dimen/itemVerticalMargin"
         android:background="@android:color/transparent"
         android:src="@drawable/ic_back_gray_background" />
 

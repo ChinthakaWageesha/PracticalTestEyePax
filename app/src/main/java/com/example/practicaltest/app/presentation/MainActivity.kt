@@ -6,6 +6,7 @@ import android.view.MenuItem
 import com.example.practicaltest.R
 import com.example.practicaltest.app.dependencyinjction.injectFeature
 import com.example.practicaltest.app.presentation.newsfeed.NewsFeedFragment
+import com.example.practicaltest.app.presentation.profile.ProfileFragment
 import com.example.practicaltest.core.extenstion.currentFragment
 import com.example.practicaltest.core.extenstion.replaceFragment
 import com.example.practicaltest.core.extenstion.showToast
@@ -46,9 +47,20 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
         }
     }
 
+    private fun setProfile(){
+        if (getCurrentFragment() !is ProfileFragment) {
+            supportFragmentManager.replaceFragment(
+                R.id.fl_main,
+                ProfileFragment.newInstance(),
+                ProfileFragment.TAG
+            )
+        }
+    }
+
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.nav_news_feed -> setNewsFeed()
+            R.id.nav_profile -> setProfile()
         }
         return true
     }
@@ -66,7 +78,7 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
 
         Handler().postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
 
-        if (count == 1) {
+        if (count == 2) {
             finishAffinity()
         } else {
             supportFragmentManager.popBackStack()

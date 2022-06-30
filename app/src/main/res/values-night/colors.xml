@@ -17,14 +17,16 @@
 
     <!--Colors matches to dark mode-->
 
-    <color name="colorPrimary">@color/colorRed</color>
-    <color name="colorSecondary">@color/colorRedSalsa</color>
-    <color name="colorAccent">@color/colorPink</color>
-    <color name="colorAppBackground">@color/colorWhite</color>
-    <color name="colorTextPrimary">@color/colorBlack</color>
-    <color name="colorTextSecondary">@color/colorWhite</color>
-    <color name="colorTextTertiary">@color/colorRed</color>
-    <color name="colorTextQuaternary">@color/colorBlue</color>
+    <color name="colorPrimary">@color/colorGreen</color>
+    <color name="colorSecondary">@color/colorLightGreen</color>
+    <color name="colorAccent">@color/colorLightGreen</color>
+    <color name="colorAppBackground">@color/colorBlack</color>
+    <color name="colorTextPrimary">@color/colorWhite</color>
+    <color name="colorTextSecondary">@color/colorBlack</color>
+    <color name="colorTextTertiary">@color/colorLightGreen</color>
+    <color name="colorTextQuaternary">@color/colorYellow</color>
+
+
 
 
 </resources>

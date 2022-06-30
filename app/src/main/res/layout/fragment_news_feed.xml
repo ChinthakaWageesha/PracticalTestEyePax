@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite"
+    android:background="@color/colorAppBackground"
     tools:context=".app.presentation.newsfeed.NewsFeedFragment">
 
     <EditText
@@ -57,7 +57,7 @@
 
                 <TextView
                     android:id="@+id/txt_latest_news"
-                    style="@style/TextExLargeBlackBold"
+                    style="@style/TextExLargePrimaryBold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/itemVerticalMargin"
@@ -70,7 +70,7 @@
 
                 <TextView
                     android:id="@+id/txt_see_all"
-                    style="@style/TextLargeBlue"
+                    style="@style/TextLargeQuaternary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/itemVerticalMargin"
@@ -82,6 +82,25 @@
                     app:layout_constraintBottom_toBottomOf="@+id/txt_latest_news"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/txt_latest_news" />
+
+                <TextView
+                    android:id="@+id/txt_no_data_latest_news"
+                    style="@style/TextMediumPrimary"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginBottom="16dp"
+                    android:fontFamily="@font/nunito_semi_bold"
+                    android:gravity="center"
+                    android:text="@string/message_no_latest_news"
+                    android:textStyle="italic"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/txt_latest_news" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_latest_news"
@@ -112,7 +131,7 @@
 
                 <TextView
                     android:id="@+id/txt_news_results_count"
-                    style="@style/TextMediumPlusBlack"
+                    style="@style/TextMediumPlusPrimary"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -125,6 +144,24 @@
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="About 55435 results for Apple " />
 
+                <TextView
+                    android:id="@+id/txt_no_data_news"
+                    style="@style/TextMediumPrimary"
+                    android:fontFamily="@font/nunito_semi_bold"
+                    android:textStyle="italic"
+                    android:layout_width="0dp"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="@string/message_no_news"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_news_results_count" />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_news"
                     android:layout_width="0dp"
@@ -133,7 +170,9 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txt_news_results_count" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -48,34 +48,6 @@ fun EditText.clearTextOnRightDrawableClick() {
     })
 }
 
-@SuppressLint("ClickableViewAccessibility")
-fun EditText.enableEditOnRightDrawableClick() {
-    this.setOnTouchListener(object : View.OnTouchListener {
-
-        override fun onTouch(view: View?, event: MotionEvent?): Boolean {
-
-            if (event?.action == MotionEvent.ACTION_UP) {
-
-                val drawable = this@enableEditOnRightDrawableClick.compoundDrawables[2]
-                if (drawable != null) {
-                    val touchEventX = event.x
-                    val touchAreaRight = this@enableEditOnRightDrawableClick.right
-                    val touchAreaLeft = touchAreaRight - drawable.bounds.width()
-                    if (touchEventX >= touchAreaLeft && touchEventX <= touchAreaRight) {
-                        view?.performClick();
-                        this@enableEditOnRightDrawableClick.isEnabled = true
-                        this@enableEditOnRightDrawableClick.isFocusable = true
-                        this@enableEditOnRightDrawableClick.isClickable = true
-                        this@enableEditOnRightDrawableClick.isFocusableInTouchMode = true
-                    }
-                    return true
-                }
-            }
-            return false
-        }
-    })
-}
-
 fun EditText.onTextChanged(onTextChanged: (String) -> Unit) {
     this.addTextChangedListener(object : TextWatcher {
         override fun afterTextChanged(s: Editable?) {

@@ -49,7 +49,7 @@ class LatestNewsAdapter(
 
             imgLatestNews.loadImage(latestNews.urlToImage)
 
-            cardLatestNews.setOnClickListener { GoTo.latestNews(itemView.context) }
+            cardLatestNews.setOnClickListener { GoTo.latestNews(itemView.context, latestNews) }
         }
     }
 

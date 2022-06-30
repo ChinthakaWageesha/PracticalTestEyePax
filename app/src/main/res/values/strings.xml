@@ -21,4 +21,8 @@
     <string name="label_see_all">See All</string>
 
     <string name="label_hot_updates">Hot Updates</string>
+
+    <string name="message_no_news">You have no news to show at this moment!</string>
+    <string name="message_no_latest_news">You have no latest news to show at this moment!</string>
+
 </resources>
