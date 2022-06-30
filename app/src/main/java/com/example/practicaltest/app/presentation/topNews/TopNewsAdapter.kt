@@ -1,5 +1,6 @@
 package com.example.practicaltest.app.presentation.topNews
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,8 +8,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.practicaltest.R
+import com.example.practicaltest.app.domain.model.DArticle
+import com.example.practicaltest.core.extenstion.loadImage
 
-class TopNewsAdapter : RecyclerView.Adapter<TopNewsAdapter.TopNewsViewHolder>() {
+class TopNewsAdapter(
+    private val topNewsList: MutableList<DArticle>?
+) : RecyclerView.Adapter<TopNewsAdapter.TopNewsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopNewsViewHolder {
         return TopNewsViewHolder(
@@ -20,7 +25,7 @@ class TopNewsAdapter : RecyclerView.Adapter<TopNewsAdapter.TopNewsViewHolder>() 
         onBind(position)
     }
 
-    override fun getItemCount(): Int = 10
+    override fun getItemCount(): Int = topNewsList?.size ?: 0
 
     inner class TopNewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -30,16 +35,16 @@ class TopNewsAdapter : RecyclerView.Adapter<TopNewsAdapter.TopNewsViewHolder>() 
         private val txtContent = itemView.findViewById<TextView>(R.id.txt_top_news_content)
         private val txtPublisher = itemView.findViewById<TextView>(R.id.txt_top_news_publisher)
 
+        @SuppressLint("SetTextI18n")
         fun onBind(position: Int) {
 
-            txtPublishDay.text = "Monday, 10 May 2021"
-            txtHeading.text =
-                "WHO classifies triple-mutant Covid variant from India as global health risk"
-            txtContent.text =
-                "A World Health Organization official said Monday it is reclassifying " +
-                        "the highly contagious triple-mutant Covid variant spreading in India as a “variant " +
-                        "of concern,” indicating that it’s become a..."
-            txtPublisher.text = "Published by Berkeley Lovelace Jr."
+            val topNews = topNewsList?.get(position)
+
+            txtPublishDay.text = topNews?.publishedAt!!.split("T")[0]
+            txtHeading.text = topNews.title
+            txtContent.text = topNews.content
+            txtPublisher.text = "Published by ${topNews.author}"
+            imgTopNews.loadImage(topNews.urlToImage)
 
         }
     }

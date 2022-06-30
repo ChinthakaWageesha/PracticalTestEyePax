@@ -21,10 +21,9 @@ import com.example.practicaltest.core.util.Resource
 import com.example.practicaltest.core.util.ResourceState
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class NewsFeedFragment : BaseFragment(), (String) -> Unit{
+class NewsFeedFragment : BaseFragment(), (String) -> Unit {
 
     private lateinit var binding: FragmentNewsFeedBinding
-    private lateinit var latestNewsAdapter: LatestNewsAdapter
     private lateinit var categoryList: ArrayList<String>
     private lateinit var categoryAdapter: NewsCategoryAdapter
     private lateinit var newsAdapter: NewsAdapter
@@ -51,12 +50,12 @@ class NewsFeedFragment : BaseFragment(), (String) -> Unit{
         binding.txtSeeAll.setOnClickListener { GoTo.topNews(requireContext()) }
     }
 
-    private fun initSearch(){
+    private fun initSearch() {
         binding.etSearch.validateOnTextChange(isCheckValidateIcon = true) { s -> s.isNotEmpty() }
         binding.etSearch.clearTextOnRightDrawableClick()
         binding.etSearch.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                if (v.text.toString().isEmpty()){
+                if (v.text.toString().isEmpty()) {
                     resetBreakingNewsSection()
                 } else {
                     v.text.toString().showToast(requireContext())
@@ -67,7 +66,7 @@ class NewsFeedFragment : BaseFragment(), (String) -> Unit{
         }
     }
 
-    private fun getLatestNews(){
+    private fun getLatestNews() {
         vmNews.getLatestNews()
         vmNews.liveDataLatestNews.observe(requireActivity(), { observerGetLatestNews(it) })
     }
@@ -89,10 +88,9 @@ class NewsFeedFragment : BaseFragment(), (String) -> Unit{
     }
 
     private fun setLatestNewsAdapter(latestNewsList: MutableList<DArticle>) {
-        latestNewsAdapter = LatestNewsAdapter(latestNewsList)
-        layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        binding.rvLatestNews.adapter = latestNewsAdapter
-        binding.rvLatestNews.layoutManager = layoutManager
+        binding.rvLatestNews.adapter = LatestNewsAdapter(latestNewsList)
+        binding.rvLatestNews.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
     }
 
     private fun setCategoryAdapter() {
