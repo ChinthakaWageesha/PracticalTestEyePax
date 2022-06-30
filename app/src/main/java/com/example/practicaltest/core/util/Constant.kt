@@ -12,4 +12,6 @@ object ApiResponseCodes {
 
 object Msg {
     const val ERROR_COMMON = "Oops, something went wrong. Let\'s try it again."
+    const val INTERNET_ISSUE = "Sorry, Seems your internet connection is not available. Check & try again."
+
 }

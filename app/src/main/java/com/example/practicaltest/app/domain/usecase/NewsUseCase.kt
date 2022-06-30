@@ -6,4 +6,6 @@ class NewsUseCase(private val newsRepository: NewsRepository) {
 
     fun getLatestNews() = newsRepository.getLatestNews()
 
+    fun getNews(searchKey: String?) = newsRepository.getNews(searchKey)
+
 }

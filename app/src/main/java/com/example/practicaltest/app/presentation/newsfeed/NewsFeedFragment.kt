@@ -2,6 +2,8 @@ package com.example.practicaltest.app.presentation.newsfeed
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,21 +15,24 @@ import com.example.practicaltest.core.general.GoTo
 import com.example.practicaltest.core.presentation.BaseFragment
 import com.example.practicaltest.databinding.FragmentNewsFeedBinding
 import android.view.inputmethod.EditorInfo
+import androidx.lifecycle.Observer
+import com.example.practicaltest.apiclient.apiSupport.response.NewsResponse
+import com.example.practicaltest.app.dependencyinjction.mapToDomain
 import com.example.practicaltest.app.domain.model.DArticle
 import com.example.practicaltest.app.presentation.newsfeed.adapter.LatestNewsAdapter
 import com.example.practicaltest.app.presentation.newsfeed.adapter.NewsAdapter
 import com.example.practicaltest.app.presentation.newsfeed.adapter.NewsCategoryAdapter
+import com.example.practicaltest.core.extenstion.withNetwork
+import com.example.practicaltest.core.util.Msg
 import com.example.practicaltest.core.util.Resource
 import com.example.practicaltest.core.util.ResourceState
+import org.koin.android.ext.android.bind
 import org.koin.android.viewmodel.ext.android.viewModel
+import kotlin.properties.Delegates
 
 class NewsFeedFragment : BaseFragment(), (String) -> Unit {
 
     private lateinit var binding: FragmentNewsFeedBinding
-    private lateinit var categoryList: ArrayList<String>
-    private lateinit var categoryAdapter: NewsCategoryAdapter
-    private lateinit var newsAdapter: NewsAdapter
-    private lateinit var layoutManager: LinearLayoutManager
     private val vmNews by viewModel<NewsViewModel>()
 
     override fun onCreateView(
@@ -45,30 +50,42 @@ class NewsFeedFragment : BaseFragment(), (String) -> Unit {
     private fun initLayout() {
         initSearch()
         getLatestNews()
+        getNews()
         setCategoryAdapter()
-        setNewsAdapter()
         binding.txtSeeAll.setOnClickListener { GoTo.topNews(requireContext()) }
     }
 
     private fun initSearch() {
         binding.etSearch.validateOnTextChange(isCheckValidateIcon = true) { s -> s.isNotEmpty() }
-        binding.etSearch.clearTextOnRightDrawableClick()
-        binding.etSearch.setOnEditorActionListener { v, actionId, event ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                if (v.text.toString().isEmpty()) {
-                    resetBreakingNewsSection()
+
+        binding.etSearch.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            override fun onTextChanged(sequence: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                if (sequence.toString().isEmpty()) {
+                    resetNewsFeed()
                 } else {
-                    v.text.toString().showToast(requireContext())
-                    setNewsSearch()
+                    setNewsSearch(sequence.toString())
                 }
             }
-            false
-        }
+
+            override fun afterTextChanged(p0: Editable?) {}
+
+        })
+
     }
 
     private fun getLatestNews() {
-        vmNews.getLatestNews()
+        callLatestNewsService()
         vmNews.liveDataLatestNews.observe(requireActivity(), { observerGetLatestNews(it) })
+    }
+
+    private fun callLatestNewsService() {
+        context?.withNetwork({
+            vmNews.getLatestNews()
+        }, {
+            Msg.INTERNET_ISSUE.showToast(requireContext())
+        })
     }
 
     private fun observerGetLatestNews(resource: Resource<List<DArticle>>) {
@@ -93,37 +110,70 @@ class NewsFeedFragment : BaseFragment(), (String) -> Unit {
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
     }
 
+    private fun getNews() {
+        callGetNewsService()
+        binding.etSearch.requestFocus()
+        vmNews.liveDataNews.observe(requireActivity(), { observerGetNews(it) })
+    }
+
+    private fun callGetNewsService() {
+        context?.withNetwork({
+            vmNews.getNews()
+        }, {
+            Msg.INTERNET_ISSUE.showToast(requireContext())
+        })
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun observerGetNews(resource: Resource<NewsResponse>) {
+        resource.let {
+            when (it.state) {
+                ResourceState.LOADING -> showProgress()
+                ResourceState.SUCCESS -> {
+                    hideProgress()
+                    binding.txtNewsResultsCount.visibility = View.VISIBLE
+                    binding.txtNewsResultsCount.text =
+                        "About ${it.totalResults} results for ${binding.etSearch.text}"
+                    setNewsAdapter(it.data?.data!!.map { it.mapToDomain() }.toMutableList())
+                }
+                ResourceState.ERROR -> {
+                    hideProgress()
+                    it.message?.showToast(requireContext())
+                }
+            }
+        }
+    }
+
     private fun setCategoryAdapter() {
-        categoryList = arrayListOf()
+        val categoryList: ArrayList<String> = arrayListOf()
         categoryList.add("Category")
         categoryList.add("Language")
         categoryList.add("Country")
 
-        categoryAdapter = NewsCategoryAdapter(categoryList, this)
-        layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        binding.rvCategories.adapter = categoryAdapter
-        binding.rvCategories.layoutManager = layoutManager
+        binding.rvCategories.adapter = NewsCategoryAdapter(categoryList, this)
+        binding.rvCategories.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
     }
 
-    private fun setNewsAdapter() {
-        newsAdapter = NewsAdapter()
-        layoutManager = LinearLayoutManager(context)
-        binding.rvNews.adapter = newsAdapter
-        binding.rvNews.layoutManager = layoutManager
+    private fun setNewsAdapter(newsList: MutableList<DArticle>) {
+        binding.rvNews.adapter = NewsAdapter(newsList)
+        binding.rvNews.layoutManager = LinearLayoutManager(context)
     }
 
-    private fun resetBreakingNewsSection() {
+    private fun resetNewsFeed() {
+        vmNews.searchKey = null
+        callGetNewsService()
         binding.clLatestNewsBase.visibility = View.VISIBLE
         binding.txtNewsResultsCount.visibility = View.GONE
         binding.imgNotifications.visibility = View.VISIBLE
     }
 
     @SuppressLint("SetTextI18n")
-    private fun setNewsSearch() {
+    private fun setNewsSearch(searchKey: String) {
+        vmNews.searchKey = searchKey
+        callGetNewsService()
         binding.clLatestNewsBase.visibility = View.GONE
-        binding.txtNewsResultsCount.visibility = View.VISIBLE
         binding.imgNotifications.visibility = View.GONE
-        binding.txtNewsResultsCount.text = "About 23232 results for ${binding.etSearch.text}"
     }
 
     companion object {
@@ -132,7 +182,7 @@ class NewsFeedFragment : BaseFragment(), (String) -> Unit {
     }
 
     override fun invoke(category: String) {
-        category.showToast(requireContext())
+        //category.showToast(requireContext())
     }
 
 }

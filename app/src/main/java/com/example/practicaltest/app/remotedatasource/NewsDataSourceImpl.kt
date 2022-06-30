@@ -1,5 +1,6 @@
 package com.example.practicaltest.app.remotedatasource
 
+import com.example.practicaltest.apiclient.apiSupport.response.NewsResponse
 import com.example.practicaltest.apiclient.apis.NewsApi
 import com.example.practicaltest.app.data.datasource.NewsDataSource
 import com.example.practicaltest.app.dependencyinjction.mapToDomain
@@ -17,4 +18,11 @@ class NewsDataSourceImpl(
                 it.mapToDomain()
             }
         }
+
+    override fun getNews(searchKey: String?): Single<NewsResponse> =
+        newsApi.getNewsFeed(Constant.API_KEY, searchKey,"en").map {
+            it
+        }
+
+
 }

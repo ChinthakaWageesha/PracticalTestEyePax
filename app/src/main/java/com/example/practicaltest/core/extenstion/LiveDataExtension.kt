@@ -4,8 +4,8 @@ import androidx.lifecycle.MutableLiveData
 import com.example.practicaltest.core.util.Resource
 import com.example.practicaltest.core.util.ResourceState
 
-fun <T> MutableLiveData<Resource<T>>.setSuccess(data: T, message: String?) =
-    postValue(Resource(ResourceState.SUCCESS, data, message))
+fun <T> MutableLiveData<Resource<T>>.setSuccess(data: T, totalResults: Int?, message: String?) =
+    postValue(Resource(ResourceState.SUCCESS,  data, totalResults, message))
 
 fun <T> MutableLiveData<Resource<T>>.setLoading() =
     postValue(
@@ -20,6 +20,7 @@ fun <T> MutableLiveData<Resource<T>>.setError(message: String?) =
         Resource(
             ResourceState.ERROR,
             value?.data,
+            0,
             message
         )
     )

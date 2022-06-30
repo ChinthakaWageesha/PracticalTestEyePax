@@ -7,8 +7,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.practicaltest.R
+import com.example.practicaltest.app.domain.model.DArticle
+import com.example.practicaltest.core.extenstion.loadImage
 
-class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
+class NewsAdapter(
+    private val newsList: MutableList<DArticle>?
+) : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
         return NewsViewHolder(
@@ -20,7 +24,7 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
         onBind(position)
     }
 
-    override fun getItemCount(): Int = 10
+    override fun getItemCount(): Int = newsList?.size ?: 0
 
     inner class NewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -31,12 +35,12 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
 
         fun onBind(position: Int) {
 
-            txtPublisher.text = "Matt Villano"
-            txtPublishDay.text = "Sunday, 9 May 2021"
-            txtHeading.text =
-                "Crypto investors should be prepared to lose all their money, BOE governor says"
+            val news = newsList?.get(position)
+
+            txtPublisher.text = news?.author
+            txtPublishDay.text = news?.publishedAt!!.split("T")[0]
+            txtHeading.text = news.title
+            imgNews.loadImage(news.urlToImage)
         }
     }
-
-
 }

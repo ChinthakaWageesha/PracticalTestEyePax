@@ -16,6 +16,8 @@ interface NewsApi {
 
     @GET("everything")
     fun getNewsFeed(
-        @retrofit2.http.Query("apiKey") apiKey: String
+        @retrofit2.http.Query("apiKey") apiKey: String,
+        @retrofit2.http.Query("q") searchKey: String?,
+        @retrofit2.http.Query("qInTitle") title: String?,
     ): Single<NewsResponse>
 }

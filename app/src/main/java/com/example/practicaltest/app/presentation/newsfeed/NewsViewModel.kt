@@ -2,6 +2,7 @@ package com.example.practicaltest.app.presentation.newsfeed
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.practicaltest.apiclient.apiSupport.response.NewsResponse
 import com.example.practicaltest.app.domain.model.DArticle
 import com.example.practicaltest.app.domain.usecase.NewsUseCase
 import com.example.practicaltest.core.extenstion.setError
@@ -17,20 +18,39 @@ class NewsViewModel(
 
     private val compositeDisposable = CompositeDisposable()
     val liveDataLatestNews = MutableLiveData<Resource<List<DArticle>>>()
+    val liveDataNews = MutableLiveData<Resource<NewsResponse>>()
+    var searchKey: String? = null
 
 
-    fun getLatestNews(){
+    fun getLatestNews() {
         liveDataLatestNews.setLoading()
         compositeDisposable.add(
             newsUseCase.getLatestNews()
                 .subscribeOn(Schedulers.io())
                 .map { it }
                 .subscribe({
-                    liveDataLatestNews.setSuccess(it, null)
-                },{
+                    liveDataLatestNews.setSuccess(it, null, null)
+                }, {
                     liveDataLatestNews.setError(it.message)
                 })
         )
+    }
+
+    fun getNews() {
+        if (searchKey.isNullOrEmpty()) {
+            liveDataNews.setLoading()
+        }
+        compositeDisposable.add(
+            newsUseCase.getNews(searchKey = searchKey)
+                .subscribeOn(Schedulers.io())
+                .map { it }
+                .subscribe({
+                    liveDataNews.setSuccess(it, it.totalResults, null)
+                }, {
+                    liveDataNews.setError(it.message)
+                })
+        )
+
     }
 
     override fun onCleared() {

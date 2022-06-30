@@ -6,7 +6,9 @@ import com.example.practicaltest.R
 import com.example.practicaltest.app.domain.model.DArticle
 import com.example.practicaltest.app.presentation.newsfeed.NewsViewModel
 import com.example.practicaltest.core.extenstion.showToast
+import com.example.practicaltest.core.extenstion.withNetwork
 import com.example.practicaltest.core.presentation.BaseActivity
+import com.example.practicaltest.core.util.Msg
 import com.example.practicaltest.core.util.Resource
 import com.example.practicaltest.core.util.ResourceState
 import com.example.practicaltest.databinding.ActivityTopNewsBinding
@@ -27,8 +29,13 @@ class TopNewsActivity : BaseActivity() {
         getLatestNews()
     }
 
-    private fun getLatestNews(){
-        vmNews.getLatestNews()
+    private fun getLatestNews() {
+        withNetwork({
+            vmNews.getLatestNews()
+        }, {
+            Msg.INTERNET_ISSUE.showToast(this)
+        })
+
         vmNews.liveDataLatestNews.observe(this, { observerGetLatestNews(it) })
     }
 
