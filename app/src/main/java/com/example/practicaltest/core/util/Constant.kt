@@ -3,6 +3,7 @@ package com.example.practicaltest.core.util
 object Constant {
     const val BASE_URL = "https://newsapi.org/v2/"
     const val API_KEY = "c61caf000df34c8790e911d40f57fa67"
+    const val PREF_USER = "user_data"
 }
 
 object ApiResponseCodes {
@@ -17,4 +18,13 @@ object Msg {
 
 object IntentParcelable {
     const val LATEST_NEWS = "latest_news"
+}
+
+object DataBase {
+    const val DB_TBL_NAME = "users"
+    const val DB_TBL_USER_ID = "user_id"
+    const val DB_TBL_FIRST_NAME = "first_name"
+    const val DB_TBL_LAST_NAME = "last_name"
+    const val DB_TBL_EMAIL = "email"
+    const val DB_TBL_PASSWORD = "password"
 }

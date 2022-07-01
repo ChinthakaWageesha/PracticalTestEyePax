@@ -4,8 +4,9 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import com.example.practicaltest.R
-import com.example.practicaltest.core.extenstion.clearTextOnRightDrawableClick
-import com.example.practicaltest.core.extenstion.validateOnTextChange
+import com.example.practicaltest.app.data.database.UserDatabase
+import com.example.practicaltest.app.domain.model.DUser
+import com.example.practicaltest.core.extenstion.*
 import com.example.practicaltest.core.general.GoTo
 import com.example.practicaltest.core.presentation.BaseActivity
 import com.example.practicaltest.databinding.ActivityRegisterBinding
@@ -23,10 +24,10 @@ class RegisterActivity : BaseActivity() {
         setContentView(binding.root)
         initLayout()
         validateLogin()
+        binding.btnSignUp.setOnClickListener { registerUser() }
     }
 
     private fun initLayout() {
-
         binding.etFirstName.addTextChangedListener(GenericTextWatcher())
         binding.etLastName.addTextChangedListener(GenericTextWatcher())
         binding.etEmail.addTextChangedListener(GenericTextWatcher())
@@ -42,14 +43,34 @@ class RegisterActivity : BaseActivity() {
         binding.etFirstName.validateOnTextChange(isCheckValidateIcon = true) { s -> s.isNotEmpty() }
         binding.etLastName.validateOnTextChange(isCheckValidateIcon = true) { s -> s.isNotEmpty() }
         binding.etEmail.validateOnTextChange(isCheckValidateIcon = true) { s -> s.isNotEmpty() }
-        binding.etPassword.validateOnTextChange(isCheckValidateIcon = true) { s -> s.length > 8 }
-        binding.etConfirmPassword.validateOnTextChange(isCheckValidateIcon = true) { s -> s.length > 8 }
+        binding.etPassword.validateOnTextChange(isCheckValidateIcon = true) { s -> s.isNotEmpty() }
+        binding.etConfirmPassword.validateOnTextChange(isCheckValidateIcon = true) { s -> s.isNotEmpty() }
 
         binding.etFirstName.clearTextOnRightDrawableClick()
         binding.etLastName.clearTextOnRightDrawableClick()
         binding.etEmail.clearTextOnRightDrawableClick()
         binding.etPassword.clearTextOnRightDrawableClick()
         binding.etConfirmPassword.clearTextOnRightDrawableClick()
+    }
+
+    private fun registerUser() {
+        val user = DUser()
+        user.firstName = binding.etFirstName.text.toString()
+        user.lastName = binding.etLastName.text.toString()
+        user.email = binding.etEmail.text.toString()
+        user.password = binding.etPassword.text.toString()
+
+        val userDatabase = UserDatabase.getDatabase(this)
+        val userDao = userDatabase.userDao()
+        Thread {
+            userDao.registerUser(user)
+            runOnUiThread {
+                "User registered successfully".showToast(this)
+                GoTo.main(this)
+            }
+        }.start()
+
+
     }
 
     inner class GenericTextWatcher() : TextWatcher {
@@ -60,7 +81,9 @@ class RegisterActivity : BaseActivity() {
         override fun onTextChanged(ch: CharSequence?, p1: Int, p2: Int, p3: Int) {
             binding.btnSignUp.isEnabled =
                 binding.etFirstName.text!!.isNotEmpty() && binding.etLastName.text!!.isNotEmpty() &&
-                        binding.etEmail.text!!.isNotEmpty() && binding.etPassword.text!!.isNotEmpty() &&
+                        binding.etEmail.text!!.toString()
+                            .isValidEmail() && binding.etPassword.text!!.toString()
+                    .isValidPassword() &&
                         binding.etConfirmPassword.text.toString() == binding.etPassword.text.toString()
         }
     }
